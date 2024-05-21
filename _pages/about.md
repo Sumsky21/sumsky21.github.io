@@ -57,7 +57,7 @@ The 2022 ACM Web Conference, *Lyon, France*
 
 [**PDF**](https://dl.acm.org/doi/pdf/10.1145/3485447.3512199) | [**Code**](https://github.com/RingBDStack/CurvGAN)
 </div>
-</div>**
+</div>
 
 
 **<div class='paper-box'><div class='paper-box-image'><div><div class="badge">ICDM 2021</div><img src='images/ace-hgnn.png' alt="sym" width="100%"></div></div>
@@ -72,7 +72,7 @@ Xingcheng Fu, Jianxin Li, Jia Wu, Qingyun Sun, Cheng Ji, Senzhang Wang, **Jiajun
 
 [**PDF**](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9679192) | [**Code**](https://github.com/RingBDStack/ACE-HGNN)
 </div>
-</div>**
+</div>
 
 <!--# 💬 Invited Talks
 - *2021.06*, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ornare aliquet ipsum, ac tempus justo dapibus sit amet. 
