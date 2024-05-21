@@ -17,7 +17,7 @@ redirect_from:
 
 
 
-# 👋 About me
+# 👋 About Me
 
 Hi! I am Jiajun Tan（谭家俊）, a second-year master student at [Institute of Computing Technology](http://www.ict.cas.cn/), [Chinese Academy of Sciences](https://www.cas.cn/), supervised by Prof. Huawei Shen and [Prof. Fei Sun](http://ofey.me/). My current research interests include **machine unlearning** and **knowledge manipulating in LLMs**. Before joining ICT, I received my bachelor's degree from [Institute of Artificial Intelligence](https://iai.buaa.edu.cn/), [Beihang University](https://www.buaa.edu.cn/) in 2022.
 
@@ -78,8 +78,9 @@ Xingcheng Fu, Jianxin Li, Jia Wu, Qingyun Sun, Cheng Ji, Senzhang Wang, **Jiajun
 - *2021.06*, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ornare aliquet ipsum, ac tempus justo dapibus sit amet. 
 - *2021.03*, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ornare aliquet ipsum, ac tempus justo dapibus sit amet.  \| [\[video\]](https://github.com/)-->
 
-# 🤝 Academic Services
+# 🤝 Services
 - Reviewer of ACM Computing Surveys (CSUR).
+- Teaching Assistant of *Advanced Artificial Intelligence*, UCAS 2023 Fall.
 
 # 💻 Internships
 - *2021.11 - 2022.06*, Tencent BDA Lab, Beijing.
