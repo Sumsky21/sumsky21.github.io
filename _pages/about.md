@@ -26,7 +26,7 @@ Hi! I am Jiajun Tan（谭家俊）, a second-year master student at [Institute o
 - -->
 
 # 📖 Educations
-- *2022.09 - now*, Msc in Computer Science and Technology, Institute of Computing Technology, Chinese Academy of Sciences.
+- *2022.09 - Present*, Msc in Computer Science and Technology, Institute of Computing Technology, Chinese Academy of Sciences.
 - *2018.09 - 2022.06*, Bsc in Artificial Intelligence, Beihang University.
 
 
@@ -83,7 +83,7 @@ Xingcheng Fu, Jianxin Li, Jia Wu, Qingyun Sun, Cheng Ji, Senzhang Wang, **Jiajun
 - Teaching Assistant of *Advanced Artificial Intelligence*, UCAS 2023 Fall.
 
 # 💻 Internships
-- *2021.11 - 2022.06*, Tencent BDA Lab, Beijing.
+- *2021.11 - 2022.06*, <img src='./images/tencent-qq.png' style='width: 6em;'> Tencent BDA Lab, Beijing.
 
 # 🏅 Honors and Awards
 - *2021.10*, National Scholarship, Ministry of Education of P.R.China.
