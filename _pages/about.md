@@ -1,6 +1,6 @@
 ---
 permalink: /
-title: ""
+title: "Jiajun Tan"
 excerpt: ""
 author_profile: true
 redirect_from: 
@@ -19,7 +19,7 @@ redirect_from:
 
 # 👋 About me
 
-Hi! I am Jiajun Tan（谭家俊）, a second-year master student at [Institute of Computing Technology](http://www.ict.cas.cn/), [Chinese Academy of Sciences](https://www.cas.cn/), supervised by Prof. Huawei Shen and [Prof. Fei Sun](http://ofey.me/). My current research interests include **machine unlearning** and **knowledge manupulating in LLMs**. Before joining ICT, I received my bachelor's degree from [Institute of Artificial Intelligence](https://iai.buaa.edu.cn/), [Beihang University](https://www.buaa.edu.cn/) in 2022.
+Hi! I am Jiajun Tan（谭家俊）, a second-year master student at [Institute of Computing Technology](http://www.ict.cas.cn/), [Chinese Academy of Sciences](https://www.cas.cn/), supervised by Prof. Huawei Shen and [Prof. Fei Sun](http://ofey.me/). My current research interests include **machine unlearning** and **knowledge manipulating in LLMs**. Before joining ICT, I received my bachelor's degree from [Institute of Artificial Intelligence](https://iai.buaa.edu.cn/), [Beihang University](https://www.buaa.edu.cn/) in 2022.
 
 <!-- # 🔥 News
 - *2024.03*: &nbsp;🎉🎉 Fir
