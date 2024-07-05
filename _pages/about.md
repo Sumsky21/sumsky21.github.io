@@ -74,12 +74,27 @@ Xingcheng Fu, Jianxin Li, Jia Wu, Qingyun Sun, Cheng Ji, Senzhang Wang, **Jiajun
 </div>
 </div>
 
+
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">arXiv Preprint</div><img src='images/the_fall_of_rome.png' alt="sym" width="100%"></div></div>
+<div class='paper-box-text' markdown="1">
+
+[The Fall of ROME: Understanding the Collapse of LLMs in Model Editing](https://arxiv.org/abs/2406.11263)
+
+Wanli Yang, Fei Sun, **Jiajun Tan**, Xinyu Ma, Du Su, Dawei Yin, Huawei Shen
+
+arXiv Preprint 2406.11263
+
+[**PDF**](https://arxiv.org/pdf/2406.11263)
+</div>
+</div>
+
+
 <!--# 💬 Invited Talks
 - *2021.06*, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ornare aliquet ipsum, ac tempus justo dapibus sit amet. 
 - *2021.03*, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ornare aliquet ipsum, ac tempus justo dapibus sit amet.  \| [\[video\]](https://github.com/)-->
 
 # 🤝 Services
-- Reviewer of ACM Computing Surveys (CSUR).
+- Reviewer of *ACM Computing Surveys* (CSUR).
 - Teaching Assistant of *Advanced Artificial Intelligence*, UCAS 2023 Fall.
 
 # 💻 Internships
