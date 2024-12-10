@@ -19,7 +19,7 @@ redirect_from:
 
 # 👋 About Me
 
-Hi! I am Jiajun Tan（谭家俊）, a second-year master student at [Institute of Computing Technology](http://www.ict.cas.cn/), [Chinese Academy of Sciences](https://www.cas.cn/), supervised by Prof. Huawei Shen and [Prof. Fei Sun](http://ofey.me/). My current research interests include **machine unlearning** and **knowledge manipulating in LLMs**. Before joining ICT, I received my bachelor's degree from [Institute of Artificial Intelligence](https://iai.buaa.edu.cn/), [Beihang University](https://www.buaa.edu.cn/) in 2022.
+Hi! I am Jiajun Tan（谭家俊）, a third-year master student at [Institute of Computing Technology](http://www.ict.cas.cn/), [Chinese Academy of Sciences](https://www.cas.cn/), supervised by Prof. Huawei Shen and [Prof. Fei Sun](http://ofey.me/). My current research interests include **machine unlearning** and **knowledge manipulating in LLMs**. Before joining ICT, I received my bachelor's degree from [Institute of Artificial Intelligence](https://iai.buaa.edu.cn/), [Beihang University](https://www.buaa.edu.cn/) in 2022.
 
 <!-- # 🔥 News
 - *2024.03*: &nbsp;🎉🎉 Fir
@@ -42,6 +42,20 @@ Hi! I am Jiajun Tan（谭家俊）, a second-year master student at [Institute o
 The 2024 ACM Web Conference, *Singapore*
 
 [**PDF**](https://dl.acm.org/doi/pdf/10.1145/3589335.3651578) | [**Code**](https://github.com/Sumsky21/Unlink-to-Unlearn)
+</div>
+</div>
+
+
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">EMNLP 2024</div><img src='images/the_fall_of_rome.png' alt="sym" width="100%"></div></div>
+<div class='paper-box-text' markdown="1">
+
+[The Fall of ROME: Understanding the Collapse of LLMs in Model Editing](https://aclanthology.org/2024.findings-emnlp.236/)
+
+Wanli Yang, Fei Sun, **Jiajun Tan**, Xinyu Ma, Du Su, Dawei Yin, Huawei Shen
+
+Accepted to EMNLP 2024
+
+[**PDF**](https://aclanthology.org/2024.findings-emnlp.236.pdf) | [**Code**](https://github.com/WanliYoung/Collapse-in-Model-Editing)
 </div>
 </div>
 
@@ -71,20 +85,6 @@ Xingcheng Fu, Jianxin Li, Jia Wu, Qingyun Sun, Cheng Ji, Senzhang Wang, **Jiajun
 **(Best paper candidate)**
 
 [**PDF**](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9679192) | [**Code**](https://github.com/RingBDStack/ACE-HGNN)
-</div>
-</div>
-
-
-<div class='paper-box'><div class='paper-box-image'><div><div class="badge">EMNLP 2024</div><img src='images/the_fall_of_rome.png' alt="sym" width="100%"></div></div>
-<div class='paper-box-text' markdown="1">
-
-[The Fall of ROME: Understanding the Collapse of LLMs in Model Editing](https://arxiv.org/abs/2406.11263)
-
-Wanli Yang, Fei Sun, **Jiajun Tan**, Xinyu Ma, Du Su, Dawei Yin, Huawei Shen
-
-Accepted to EMNLP 2024
-
-[**PDF**](https://arxiv.org/pdf/2406.11263)
 </div>
 </div>
 
