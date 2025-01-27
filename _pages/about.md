@@ -26,7 +26,7 @@ Hi! I am Jiajun Tan（谭家俊）, a third-year PhD student at [Institute of Co
 - -->
 
 # 📖 Educations
-- *2022.09 - Present*, Msc in Computer Science and Technology, Institute of Computing Technology, Chinese Academy of Sciences.
+- *2022.09 - Present*, Msc & PhD (Successive) in Computer Science and Technology, Institute of Computing Technology, Chinese Academy of Sciences.
 - *2018.09 - 2022.06*, Bsc in Artificial Intelligence, Beihang University.
 
 
@@ -101,5 +101,6 @@ Xingcheng Fu, Jianxin Li, Jia Wu, Qingyun Sun, Cheng Ji, Senzhang Wang, **Jiajun
 - *2021.11 - 2022.06*, <img src='./images/tencent-qq.png' style='width: 1em;'> Tencent SEC BigData Lab, Beijing.
 
 # 🏅 Honors and Awards
+- *2024.11*, National Scholarship, Ministry of Education of P.R.China.
 - *2021.10*, National Scholarship, Ministry of Education of P.R.China.
 - *2022.06*, Outstanding Graduate of Beijing Municipality, Beijing Municipal Education Commission.
