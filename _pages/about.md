@@ -46,6 +46,22 @@ The 2024 ACM Web Conference, *Singapore*
 </div>
 
 
+
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">ACL 2025</div><img src='images/rethinking_editing.png' alt="sym" width="100%"></div></div>
+<div class='paper-box-text' markdown="1">
+
+[The Mirage of Model Editing: Revisiting Evaluation in the Wild](https://arxiv.org/abs/2502.11177)
+
+Wanli Yang, Fei Sun, **Jiajun Tan**, Xinyu Ma, Qi Cao, Dawei Yin, Huawei Shen, Xueqi Cheng
+
+The 63rd Annual Meeting of the Association for Computational Linguistics, *Vienna, Austria*
+
+[**PDF**](https://arxiv.org/pdf/2502.11177) | [**Code**](https://github.com/WanliYoung/Revisit-Editing-Evaluation)
+</div>
+</div>
+
+
+
 <div class='paper-box'><div class='paper-box-image'><div><div class="badge">EMNLP 2024</div><img src='images/the_fall_of_rome.png' alt="sym" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
 
@@ -94,8 +110,8 @@ Xingcheng Fu, Jianxin Li, Jia Wu, Qingyun Sun, Cheng Ji, Senzhang Wang, **Jiajun
 - *2021.03*, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ornare aliquet ipsum, ac tempus justo dapibus sit amet.  \| [\[video\]](https://github.com/)-->
 
 # 🤝 Services
-- Reviewer of *ACM Computing Surveys* (CSUR).
-- Teaching Assistant of *Advanced Artificial Intelligence*, UCAS 2023 Fall.
+- **Journal Reviewer**: *ACM Computing Surveys* (CSUR), *IEEE Transactions on Artificial Intelligence* (TAI).
+- **Teaching Assistant**: *Advanced Artificial Intelligence*, UCAS 2023 Fall.
 
 # 💻 Internships
 - *2021.11 - 2022.06*, <img src='./images/tencent-qq.png' style='width: 1em;'> Tencent SEC BigData Lab, Beijing.
