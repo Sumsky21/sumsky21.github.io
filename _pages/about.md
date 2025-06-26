@@ -111,6 +111,7 @@ Xingcheng Fu, Jianxin Li, Jia Wu, Qingyun Sun, Cheng Ji, Senzhang Wang, **Jiajun
 
 # 🤝 Services
 - **Journal Reviewer**: *ACM Computing Surveys* (CSUR), *IEEE Transactions on Artificial Intelligence* (TAI).
+- **Conference Reviewer**: *ACL Rolling Review* (ARR, May 2025).
 - **Teaching Assistant**: *Advanced Artificial Intelligence*, UCAS 2023 Fall.
 
 # 💻 Internships
