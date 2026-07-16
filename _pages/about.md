@@ -19,7 +19,7 @@ redirect_from:
 
 # 👋 About Me
 
-Hi! I am Jiajun Tan（谭家俊）, a third-year PhD student at [Institute of Computing Technology](http://www.ict.cas.cn/), [Chinese Academy of Sciences](https://www.cas.cn/), supervised by Prof. Huawei Shen and [Prof. Fei Sun](http://ofey.me/). My current research interests include **machine unlearning** and **knowledge manipulating in LLMs**. Before joining ICT, I received my bachelor's degree from [Institute of Artificial Intelligence](https://iai.buaa.edu.cn/), [Beihang University](https://www.buaa.edu.cn/) in 2022.
+Hi! I am Jiajun Tan（谭家俊）, a fourth-year PhD student at [Institute of Computing Technology](http://www.ict.cas.cn/), [Chinese Academy of Sciences](https://www.cas.cn/), supervised by Prof. Huawei Shen and [Prof. Fei Sun](http://ofey.me/). My current research interests include **AI safety** and **memory of LLM agents**. Before joining ICT, I received my bachelor's degree from [Institute of Artificial Intelligence](https://iai.buaa.edu.cn/), [Beihang University](https://www.buaa.edu.cn/) in 2022.
 
 <!-- # 🔥 News
 - *2024.03*: &nbsp;🎉🎉 Fir
@@ -35,7 +35,7 @@ Hi! I am Jiajun Tan（谭家俊）, a third-year PhD student at [Institute of Co
 <div class='paper-box'><div class='paper-box-image'><div><div class="badge">WWW 2024</div><img src='images/utu.png' alt="sym" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
 
-[Unlink to Unlearn: Simplifying Edge Unlearning in GNNs](https://dl.acm.org/doi/10.1145/3589335.3651578)
+[Unlink to Unlearn: Simplifying Edge Unlearning in GNNs](https://dl.acm.org/doi/10.1145/3589335.3651578) <span class='show_paper_citations' data='PV3IC6wAAAAJ:d1gkVwhDpl0C'></span>
 
 **Jiajun Tan**, Fei Sun, Ruichen Qiu, Du Su, Huawei Shen
 
@@ -46,11 +46,25 @@ The 2024 ACM Web Conference, *Singapore*
 </div>
 
 
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">arXiv Preprint</div><img src='images/unlearning-survey.png' alt="sym" width="100%"></div></div>
+<div class='paper-box-text' markdown="1">
+
+[A Survey on Unlearning in Large Language Models](https://arxiv.org/abs/2510.25117) <span class='show_paper_citations' data='PV3IC6wAAAAJ:UeHWp8X0CEIC'></span>
+
+Wanli Yang, Fei Sun, **Jiajun Tan**, Xinyu Ma, Qi Cao, Dawei Yin, Huawei Shen, Xueqi Cheng
+
+*Preprint.* Under review.
+
+[**PDF**](https://arxiv.org/pdf/2510.25117)
+</div>
+</div>
+
+
 
 <div class='paper-box'><div class='paper-box-image'><div><div class="badge">ACL 2025</div><img src='images/rethinking_editing.png' alt="sym" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
 
-[The Mirage of Model Editing: Revisiting Evaluation in the Wild](https://arxiv.org/abs/2502.11177)
+[The Mirage of Model Editing: Revisiting Evaluation in the Wild](https://arxiv.org/abs/2502.11177) <span class='show_paper_citations' data='PV3IC6wAAAAJ:qjMakFHDy7sC'></span>
 
 Wanli Yang, Fei Sun, **Jiajun Tan**, Xinyu Ma, Qi Cao, Dawei Yin, Huawei Shen, Xueqi Cheng
 
@@ -65,7 +79,7 @@ The 63rd Annual Meeting of the Association for Computational Linguistics, *Vienn
 <div class='paper-box'><div class='paper-box-image'><div><div class="badge">EMNLP 2024</div><img src='images/the_fall_of_rome.png' alt="sym" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
 
-[The Fall of ROME: Understanding the Collapse of LLMs in Model Editing](https://aclanthology.org/2024.findings-emnlp.236/)
+[The Fall of ROME: Understanding the Collapse of LLMs in Model Editing](https://aclanthology.org/2024.findings-emnlp.236/) <span class='show_paper_citations' data='PV3IC6wAAAAJ:9yKSN-GCB0IC'></span>
 
 Wanli Yang, Fei Sun, **Jiajun Tan**, Xinyu Ma, Du Su, Dawei Yin, Huawei Shen
 
@@ -79,7 +93,7 @@ The 2024 Conference on Empirical Methods in Natural Language Processing, *Miami,
 <div class='paper-box'><div class='paper-box-image'><div><div class="badge">WWW 2022</div><img src='images/curvgan.png' alt="sym" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
 
-[Curvature Graph Generative Adversarial Networks](https://dl.acm.org/doi/10.1145/3485447.3512199)
+[Curvature Graph Generative Adversarial Networks](https://dl.acm.org/doi/10.1145/3485447.3512199) <span class='show_paper_citations' data='PV3IC6wAAAAJ:u5HHmVD_uO8C'></span>
 
 Jianxin Li, Xingcheng Fu, Qingyun Sun, Cheng Ji, **Jiajun Tan**, Jia Wu, Hao Peng
 
@@ -93,7 +107,7 @@ The 2022 ACM Web Conference, *Lyon, France*
 <div class='paper-box'><div class='paper-box-image'><div><div class="badge">ICDM 2021</div><img src='images/ace-hgnn.png' alt="sym" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
 
-[ACE-HGNN: Adaptive Curvature Exploration Hyperbolic Graph Neural Network](https://ieeexplore.ieee.org/document/9679192)
+[ACE-HGNN: Adaptive Curvature Exploration Hyperbolic Graph Neural Network](https://ieeexplore.ieee.org/document/9679192) <span class='show_paper_citations' data='PV3IC6wAAAAJ:u-x6o8ySG0sC'></span>
 
 Xingcheng Fu, Jianxin Li, Jia Wu, Qingyun Sun, Cheng Ji, Senzhang Wang, **Jiajun Tan**, Hao Peng, Philip S. Yu
 
@@ -111,7 +125,7 @@ Xingcheng Fu, Jianxin Li, Jia Wu, Qingyun Sun, Cheng Ji, Senzhang Wang, **Jiajun
 
 # 🤝 Services
 - **Journal Reviewer**: *ACM Computing Surveys* (CSUR), *IEEE Transactions on Artificial Intelligence* (TAI).
-- **Conference Reviewer**: *ACL Rolling Review* (ARR, May 2025).
+- **Conference Reviewer**: *ACL Rolling Review* (ARR), *CIKM 2026*.
 - **Teaching Assistant**: *Advanced Artificial Intelligence*, UCAS 2023 Fall.
 
 # 💻 Internships
