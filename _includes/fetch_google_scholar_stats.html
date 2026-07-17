@@ -18,7 +18,7 @@
                 var paperId = element.getAttribute('data')
                 var publication = publications[paperId]
                 if (publication && publication['num_citations'] !== undefined) {
-                    element.textContent = '| Citations: ' + publication['num_citations'];
+                    element.textContent = 'Citations: ' + publication['num_citations'];
                 }
             });
         });

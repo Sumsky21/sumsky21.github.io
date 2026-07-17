@@ -35,13 +35,13 @@ Hi! I am Jiajun Tan（谭家俊）, a fourth-year PhD student at [Institute of C
 <div class='paper-box'><div class='paper-box-image'><div><div class="badge">WWW 2024</div><img src='images/utu.png' alt="sym" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
 
-[Unlink to Unlearn: Simplifying Edge Unlearning in GNNs](https://dl.acm.org/doi/10.1145/3589335.3651578) <span class='show_paper_citations' data='PV3IC6wAAAAJ:d1gkVwhDpl0C'></span>
+[Unlink to Unlearn: Simplifying Edge Unlearning in GNNs](https://dl.acm.org/doi/10.1145/3589335.3651578)
 
 **Jiajun Tan**, Fei Sun, Ruichen Qiu, Du Su, Huawei Shen
 
 The 2024 ACM Web Conference, *Singapore*
 
-[**PDF**](https://dl.acm.org/doi/pdf/10.1145/3589335.3651578) | [**Code**](https://github.com/Sumsky21/Unlink-to-Unlearn)
+[**PDF**](https://dl.acm.org/doi/pdf/10.1145/3589335.3651578) | [**Code**](https://github.com/Sumsky21/Unlink-to-Unlearn) | <i class="ai ai-google-scholar" aria-hidden="true"></i> <span class='show_paper_citations' data='PV3IC6wAAAAJ:d1gkVwhDpl0C'></span>
 </div>
 </div>
 
@@ -49,13 +49,13 @@ The 2024 ACM Web Conference, *Singapore*
 <div class='paper-box'><div class='paper-box-image'><div><div class="badge">arXiv Preprint</div><img src='images/unlearning-survey.png' alt="sym" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
 
-[A Survey on Unlearning in Large Language Models](https://arxiv.org/abs/2510.25117) <span class='show_paper_citations' data='PV3IC6wAAAAJ:UeHWp8X0CEIC'></span>
+[A Survey on Unlearning in Large Language Models](https://arxiv.org/abs/2510.25117)
 
 Ruichen Qiu, **Jiajun Tan**, Jiayue Pu, Honglin Wang, Xiao-Shan Gao, Fei Sun
 
 *Preprint.* Under review.
 
-[**PDF**](https://arxiv.org/pdf/2510.25117)
+[**PDF**](https://arxiv.org/pdf/2510.25117) | <i class="ai ai-google-scholar" aria-hidden="true"></i> <span class='show_paper_citations' data='PV3IC6wAAAAJ:UeHWp8X0CEIC'></span>
 </div>
 </div>
 
@@ -64,13 +64,13 @@ Ruichen Qiu, **Jiajun Tan**, Jiayue Pu, Honglin Wang, Xiao-Shan Gao, Fei Sun
 <div class='paper-box'><div class='paper-box-image'><div><div class="badge">ACL 2025</div><img src='images/rethinking_editing.png' alt="sym" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
 
-[The Mirage of Model Editing: Revisiting Evaluation in the Wild](https://arxiv.org/abs/2502.11177) <span class='show_paper_citations' data='PV3IC6wAAAAJ:qjMakFHDy7sC'></span>
+[The Mirage of Model Editing: Revisiting Evaluation in the Wild](https://arxiv.org/abs/2502.11177)
 
 Wanli Yang, Fei Sun, **Jiajun Tan**, Xinyu Ma, Qi Cao, Dawei Yin, Huawei Shen, Xueqi Cheng
 
 The 63rd Annual Meeting of the Association for Computational Linguistics, *Vienna, Austria*
 
-[**PDF**](https://arxiv.org/pdf/2502.11177) | [**Code**](https://github.com/WanliYoung/Revisit-Editing-Evaluation)
+[**PDF**](https://arxiv.org/pdf/2502.11177) | [**Code**](https://github.com/WanliYoung/Revisit-Editing-Evaluation) | <i class="ai ai-google-scholar" aria-hidden="true"></i> <span class='show_paper_citations' data='PV3IC6wAAAAJ:qjMakFHDy7sC'></span>
 </div>
 </div>
 
@@ -79,13 +79,13 @@ The 63rd Annual Meeting of the Association for Computational Linguistics, *Vienn
 <div class='paper-box'><div class='paper-box-image'><div><div class="badge">EMNLP 2024</div><img src='images/the_fall_of_rome.png' alt="sym" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
 
-[The Fall of ROME: Understanding the Collapse of LLMs in Model Editing](https://aclanthology.org/2024.findings-emnlp.236/) <span class='show_paper_citations' data='PV3IC6wAAAAJ:9yKSN-GCB0IC'></span>
+[The Fall of ROME: Understanding the Collapse of LLMs in Model Editing](https://aclanthology.org/2024.findings-emnlp.236/)
 
 Wanli Yang, Fei Sun, **Jiajun Tan**, Xinyu Ma, Du Su, Dawei Yin, Huawei Shen
 
 The 2024 Conference on Empirical Methods in Natural Language Processing, *Miami, FL, USA*
 
-[**PDF**](https://aclanthology.org/2024.findings-emnlp.236.pdf) | [**Code**](https://github.com/WanliYoung/Collapse-in-Model-Editing)
+[**PDF**](https://aclanthology.org/2024.findings-emnlp.236.pdf) | [**Code**](https://github.com/WanliYoung/Collapse-in-Model-Editing) | <i class="ai ai-google-scholar" aria-hidden="true"></i> <span class='show_paper_citations' data='PV3IC6wAAAAJ:9yKSN-GCB0IC'></span>
 </div>
 </div>
 
@@ -93,13 +93,13 @@ The 2024 Conference on Empirical Methods in Natural Language Processing, *Miami,
 <div class='paper-box'><div class='paper-box-image'><div><div class="badge">WWW 2022</div><img src='images/curvgan.png' alt="sym" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
 
-[Curvature Graph Generative Adversarial Networks](https://dl.acm.org/doi/10.1145/3485447.3512199) <span class='show_paper_citations' data='PV3IC6wAAAAJ:u5HHmVD_uO8C'></span>
+[Curvature Graph Generative Adversarial Networks](https://dl.acm.org/doi/10.1145/3485447.3512199)
 
 Jianxin Li, Xingcheng Fu, Qingyun Sun, Cheng Ji, **Jiajun Tan**, Jia Wu, Hao Peng
 
 The 2022 ACM Web Conference, *Lyon, France*
 
-[**PDF**](https://dl.acm.org/doi/pdf/10.1145/3485447.3512199) | [**Code**](https://github.com/RingBDStack/CurvGAN)
+[**PDF**](https://dl.acm.org/doi/pdf/10.1145/3485447.3512199) | [**Code**](https://github.com/RingBDStack/CurvGAN) | <i class="ai ai-google-scholar" aria-hidden="true"></i> <span class='show_paper_citations' data='PV3IC6wAAAAJ:u5HHmVD_uO8C'></span>
 </div>
 </div>
 
@@ -107,14 +107,14 @@ The 2022 ACM Web Conference, *Lyon, France*
 <div class='paper-box'><div class='paper-box-image'><div><div class="badge">ICDM 2021</div><img src='images/ace-hgnn.png' alt="sym" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
 
-[ACE-HGNN: Adaptive Curvature Exploration Hyperbolic Graph Neural Network](https://ieeexplore.ieee.org/document/9679192) <span class='show_paper_citations' data='PV3IC6wAAAAJ:u-x6o8ySG0sC'></span>
+[ACE-HGNN: Adaptive Curvature Exploration Hyperbolic Graph Neural Network](https://ieeexplore.ieee.org/document/9679192)
 
 Xingcheng Fu, Jianxin Li, Jia Wu, Qingyun Sun, Cheng Ji, Senzhang Wang, **Jiajun Tan**, Hao Peng, Philip S. Yu
 
 2021 IEEE International Conference on Data Mining, *Auckland, New Zealand*
 **(Best paper candidate)**
 
-[**PDF**](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9679192) | [**Code**](https://github.com/RingBDStack/ACE-HGNN)
+[**PDF**](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9679192) | [**Code**](https://github.com/RingBDStack/ACE-HGNN) | <i class="ai ai-google-scholar" aria-hidden="true"></i> <span class='show_paper_citations' data='PV3IC6wAAAAJ:u-x6o8ySG0sC'></span>
 </div>
 </div>
 
