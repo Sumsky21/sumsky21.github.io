@@ -1,53 +1,85 @@
-from scholarly import scholarly
-import jsonpickle
 import json
-from datetime import datetime
 import os
 import time
+from datetime import datetime, timezone
+from pathlib import Path
 
-# 添加重试逻辑和超时处理
-max_retries = 3
-retry_count = 0
+from scholarly import scholarly
 
-while retry_count < max_retries:
-    try:
-        print(f"Attempt {retry_count + 1}/{max_retries} to fetch Google Scholar data...")
-        author: dict = scholarly.search_author_id(os.environ['GOOGLE_SCHOLAR_ID'])
-        
-        # 添加延迟以避免被Google限制
-        time.sleep(2)
-        
-        scholarly.fill(author, sections=['basics', 'indices', 'counts', 'publications'])
-        name = author['name']
-        author['updated'] = str(datetime.now())
-        author['publications'] = {v['author_pub_id']:v for v in author['publications']}
-        print(json.dumps(author, indent=2))
-        os.makedirs('results', exist_ok=True)
-        with open(f'results/gs_data.json', 'w') as outfile:
-            json.dump(author, outfile, ensure_ascii=False)
 
-        shieldio_data = {
-          "schemaVersion": 1,
-          "label": "citations",
-          "message": f"{author['citedby']}",
-        }
-        with open(f'results/gs_data_shieldsio.json', 'w') as outfile:
-            json.dump(shieldio_data, outfile, ensure_ascii=False)
-        
-        print("Successfully fetched and saved Google Scholar data!")
-        break
-    except Exception as e:
-        retry_count += 1
-        print(f"Error on attempt {retry_count}: {str(e)}")
-        if retry_count < max_retries:
-            wait_time = 5 * retry_count  # 指数退避
-            print(f"Retrying in {wait_time} seconds...")
-            time.sleep(wait_time)
-        else:
-            print("Max retries exceeded. Using cached data if available.")
-            # 如果有缓存的数据，可以使用它
-            if os.path.exists('results/gs_data.json'):
-                print("Using cached Google Scholar data...")
-            else:
+MAX_ATTEMPTS = 3
+REQUEST_TIMEOUT_SECONDS = 30
+RESULTS_DIR = Path(__file__).resolve().parent / "results"
+
+
+def fetch_author(scholar_id: str) -> dict:
+    """Fetch an author profile, retrying short-lived Scholar failures."""
+    scholarly.set_timeout(REQUEST_TIMEOUT_SECONDS)
+    scholarly.set_retries(2)
+
+    for attempt in range(1, MAX_ATTEMPTS + 1):
+        try:
+            print(
+                f"Fetching Google Scholar profile "
+                f"(attempt {attempt}/{MAX_ATTEMPTS})...",
+                flush=True,
+            )
+            author = scholarly.search_author_id(scholar_id)
+            author = scholarly.fill(
+                author,
+                sections=["basics", "indices", "counts", "publications"],
+            )
+
+            if "citedby" not in author or "publications" not in author:
+                raise RuntimeError("Google Scholar returned an incomplete author profile")
+            return author
+        except Exception as error:
+            print(f"Attempt {attempt} failed: {error}", flush=True)
+            if attempt == MAX_ATTEMPTS:
                 raise
+            time.sleep(5 * attempt)
 
+    raise RuntimeError("Google Scholar data could not be fetched")
+
+
+def write_results(author: dict) -> None:
+    author["updated"] = datetime.now(timezone.utc).isoformat()
+    author["publications"] = {
+        publication["author_pub_id"]: publication
+        for publication in author["publications"]
+        if publication.get("author_pub_id")
+    }
+
+    RESULTS_DIR.mkdir(parents=True, exist_ok=True)
+    with (RESULTS_DIR / "gs_data.json").open("w", encoding="utf-8") as output:
+        json.dump(author, output, ensure_ascii=False)
+
+    shields_data = {
+        "schemaVersion": 1,
+        "label": "citations",
+        "message": str(author["citedby"]),
+    }
+    with (RESULTS_DIR / "gs_data_shieldsio.json").open(
+        "w", encoding="utf-8"
+    ) as output:
+        json.dump(shields_data, output, ensure_ascii=False)
+
+
+def main() -> None:
+    scholar_id = os.environ.get("GOOGLE_SCHOLAR_ID", "").strip()
+    if not scholar_id:
+        raise RuntimeError(
+            "GOOGLE_SCHOLAR_ID is not set. Add it as a GitHub Actions secret."
+        )
+
+    author = fetch_author(scholar_id)
+    write_results(author)
+    print(
+        f"Saved {len(author['publications'])} publications and "
+        f"{author['citedby']} total citations.",
+        flush=True,
+    )
+
+
+if __name__ == "__main__":
+    main()
