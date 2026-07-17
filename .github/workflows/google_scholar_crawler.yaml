@@ -1,10 +1,9 @@
 name: Get Citation Data
 
 on:
-  page_build:
   workflow_dispatch:
   schedule:
-    - cron: "0 8 * * *"
+    - cron: "0 8 * * 1"
 
 permissions:
   contents: write
@@ -32,9 +31,10 @@ jobs:
 
       - name: Fetch citation data
         working-directory: google_scholar_crawler
-        run: timeout 6m python main.py
+        run: timeout 3m python main.py
         env:
           GOOGLE_SCHOLAR_ID: ${{ secrets.GOOGLE_SCHOLAR_ID }}
+          SCRAPER_API_KEY: ${{ secrets.SCRAPER_API_KEY }}
 
       - name: Publish citation data
         working-directory: google_scholar_crawler/results

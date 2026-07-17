@@ -4,12 +4,20 @@ import time
 from datetime import datetime, timezone
 from pathlib import Path
 
-from scholarly import scholarly
+from scholarly import ProxyGenerator, scholarly
 
 
 MAX_ATTEMPTS = 3
 REQUEST_TIMEOUT_SECONDS = 30
 RESULTS_DIR = Path(__file__).resolve().parent / "results"
+
+
+def configure_proxy(api_key: str) -> None:
+    """Route every Scholar request through ScraperAPI."""
+    proxy = ProxyGenerator()
+    if not proxy.ScraperAPI(api_key):
+        raise RuntimeError("ScraperAPI proxy setup failed. Check SCRAPER_API_KEY.")
+    scholarly.use_proxy(proxy, proxy)
 
 
 def fetch_author(scholar_id: str) -> dict:
@@ -72,6 +80,13 @@ def main() -> None:
             "GOOGLE_SCHOLAR_ID is not set. Add it as a GitHub Actions secret."
         )
 
+    scraper_api_key = os.environ.get("SCRAPER_API_KEY", "").strip()
+    if not scraper_api_key:
+        raise RuntimeError(
+            "SCRAPER_API_KEY is not set. Add it as a GitHub Actions secret."
+        )
+
+    configure_proxy(scraper_api_key)
     author = fetch_author(scholar_id)
     write_results(author)
     print(

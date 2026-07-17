@@ -87,6 +87,29 @@
 
 }
 
+.paper-citation {
+    display: none;
+    align-items: center;
+    gap: 0.3em;
+    padding: 0.2em 0.55em;
+    border-radius: 0.4em;
+    background-color: rgba(133, 133, 133, 0.12);
+    color: #6f9ff8;
+    font-size: 0.85em;
+    font-weight: 600;
+    line-height: 1.35;
+    vertical-align: middle;
+    white-space: nowrap;
+
+    &.is-loaded {
+        display: inline-flex;
+    }
+
+    .ai-google-scholar {
+        color: #858585;
+    }
+}
+
 $scroll_offset : 2em;
 h1:before, .anchor:before { 
     content: ''; 
