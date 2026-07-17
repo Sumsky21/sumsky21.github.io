@@ -96,7 +96,7 @@
     overflow: hidden;
     font-size: 0.85em;
     font-weight: 600;
-    line-height: 1.35;
+    line-height: 1.25;
     vertical-align: middle;
     white-space: nowrap;
     transform: translateY(-0.08em);
@@ -108,7 +108,7 @@
     .ai-google-scholar {
         display: inline-flex;
         align-items: center;
-        padding: 0.2em 0.45em;
+        padding: 0.1em 0.32em;
         background-color: rgba(133, 133, 133, 0.12);
         color: #858585;
     }
@@ -116,7 +116,7 @@
     .show_paper_citations {
         display: inline-flex;
         align-items: center;
-        padding: 0.2em 0.55em;
+        padding: 0.1em 0.4em;
         background-color: #6f9ff8;
         color: #fff;
     }
