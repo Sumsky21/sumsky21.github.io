@@ -129,6 +129,13 @@
     }
 }
 
+.page__content a.paper-citation,
+.page__content a.paper-citation:hover,
+.page__content a.paper-citation:focus {
+    border-bottom: 0;
+    text-decoration: none;
+}
+
 $scroll_offset : 2em;
 h1:before, .anchor:before { 
     content: ''; 
