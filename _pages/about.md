@@ -51,7 +51,7 @@ The 2024 ACM Web Conference, *Singapore*
 
 [A Survey on Unlearning in Large Language Models](https://arxiv.org/abs/2510.25117) <span class='show_paper_citations' data='PV3IC6wAAAAJ:UeHWp8X0CEIC'></span>
 
-Wanli Yang, Fei Sun, **Jiajun Tan**, Xinyu Ma, Qi Cao, Dawei Yin, Huawei Shen, Xueqi Cheng
+Ruichen Qiu, **Jiajun Tan**, Jiayue Pu, Honglin Wang, Xiao-Shan Gao, Fei Sun
 
 *Preprint.* Under review.
 
