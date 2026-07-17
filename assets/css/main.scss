@@ -89,24 +89,36 @@
 
 .paper-citation {
     display: none;
-    align-items: center;
-    gap: 0.3em;
-    padding: 0.2em 0.55em;
+    align-items: stretch;
+    gap: 0;
+    padding: 0;
     border-radius: 0.4em;
-    background-color: rgba(133, 133, 133, 0.12);
-    color: #6f9ff8;
+    overflow: hidden;
     font-size: 0.85em;
     font-weight: 600;
     line-height: 1.35;
     vertical-align: middle;
     white-space: nowrap;
+    transform: translateY(-0.08em);
 
     &.is-loaded {
         display: inline-flex;
     }
 
     .ai-google-scholar {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.2em 0.45em;
+        background-color: rgba(133, 133, 133, 0.12);
         color: #858585;
+    }
+
+    .show_paper_citations {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.2em 0.55em;
+        background-color: #6f9ff8;
+        color: #fff;
     }
 }
 
