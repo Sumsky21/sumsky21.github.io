@@ -41,7 +41,7 @@ Hi! I am Jiajun Tan（谭家俊）, a fourth-year PhD student at [Institute of C
 
 The 2024 ACM Web Conference, *Singapore*
 
-[**PDF**](https://dl.acm.org/doi/pdf/10.1145/3589335.3651578) | [**Code**](https://github.com/Sumsky21/Unlink-to-Unlearn) | <span class="paper-citation"><i class="ai ai-google-scholar" aria-hidden="true"></i><span class='show_paper_citations' data='PV3IC6wAAAAJ:d1gkVwhDpl0C'></span></span>
+[**PDF**](https://dl.acm.org/doi/pdf/10.1145/3589335.3651578) | [**Code**](https://github.com/Sumsky21/Unlink-to-Unlearn) | <a class="paper-citation" href="https://scholar.google.com/citations?view_op=view_citation&amp;hl=en&amp;user=PV3IC6wAAAAJ&amp;citation_for_view=PV3IC6wAAAAJ:d1gkVwhDpl0C" target="_blank" rel="noopener noreferrer" aria-label="View this paper on Google Scholar"><i class="ai ai-google-scholar" aria-hidden="true"></i><span class='show_paper_citations' data='PV3IC6wAAAAJ:d1gkVwhDpl0C'></span></a>
 </div>
 </div>
 
@@ -55,7 +55,7 @@ Ruichen Qiu, **Jiajun Tan**, Jiayue Pu, Honglin Wang, Xiao-Shan Gao, Fei Sun
 
 *Preprint.* Under review.
 
-[**PDF**](https://arxiv.org/pdf/2510.25117) | <span class="paper-citation"><i class="ai ai-google-scholar" aria-hidden="true"></i><span class='show_paper_citations' data='PV3IC6wAAAAJ:UeHWp8X0CEIC'></span></span>
+[**PDF**](https://arxiv.org/pdf/2510.25117) | <a class="paper-citation" href="https://scholar.google.com/citations?view_op=view_citation&amp;hl=en&amp;user=PV3IC6wAAAAJ&amp;citation_for_view=PV3IC6wAAAAJ:UeHWp8X0CEIC" target="_blank" rel="noopener noreferrer" aria-label="View this paper on Google Scholar"><i class="ai ai-google-scholar" aria-hidden="true"></i><span class='show_paper_citations' data='PV3IC6wAAAAJ:UeHWp8X0CEIC'></span></a>
 </div>
 </div>
 
@@ -70,7 +70,7 @@ Wanli Yang, Fei Sun, **Jiajun Tan**, Xinyu Ma, Qi Cao, Dawei Yin, Huawei Shen, X
 
 The 63rd Annual Meeting of the Association for Computational Linguistics, *Vienna, Austria*
 
-[**PDF**](https://arxiv.org/pdf/2502.11177) | [**Code**](https://github.com/WanliYoung/Revisit-Editing-Evaluation) | <span class="paper-citation"><i class="ai ai-google-scholar" aria-hidden="true"></i><span class='show_paper_citations' data='PV3IC6wAAAAJ:qjMakFHDy7sC'></span></span>
+[**PDF**](https://arxiv.org/pdf/2502.11177) | [**Code**](https://github.com/WanliYoung/Revisit-Editing-Evaluation) | <a class="paper-citation" href="https://scholar.google.com/citations?view_op=view_citation&amp;hl=en&amp;user=PV3IC6wAAAAJ&amp;citation_for_view=PV3IC6wAAAAJ:qjMakFHDy7sC" target="_blank" rel="noopener noreferrer" aria-label="View this paper on Google Scholar"><i class="ai ai-google-scholar" aria-hidden="true"></i><span class='show_paper_citations' data='PV3IC6wAAAAJ:qjMakFHDy7sC'></span></a>
 </div>
 </div>
 
@@ -85,7 +85,7 @@ Wanli Yang, Fei Sun, **Jiajun Tan**, Xinyu Ma, Du Su, Dawei Yin, Huawei Shen
 
 The 2024 Conference on Empirical Methods in Natural Language Processing, *Miami, FL, USA*
 
-[**PDF**](https://aclanthology.org/2024.findings-emnlp.236.pdf) | [**Code**](https://github.com/WanliYoung/Collapse-in-Model-Editing) | <span class="paper-citation"><i class="ai ai-google-scholar" aria-hidden="true"></i><span class='show_paper_citations' data='PV3IC6wAAAAJ:9yKSN-GCB0IC'></span></span>
+[**PDF**](https://aclanthology.org/2024.findings-emnlp.236.pdf) | [**Code**](https://github.com/WanliYoung/Collapse-in-Model-Editing) | <a class="paper-citation" href="https://scholar.google.com/citations?view_op=view_citation&amp;hl=en&amp;user=PV3IC6wAAAAJ&amp;citation_for_view=PV3IC6wAAAAJ:9yKSN-GCB0IC" target="_blank" rel="noopener noreferrer" aria-label="View this paper on Google Scholar"><i class="ai ai-google-scholar" aria-hidden="true"></i><span class='show_paper_citations' data='PV3IC6wAAAAJ:9yKSN-GCB0IC'></span></a>
 </div>
 </div>
 
@@ -99,7 +99,7 @@ Jianxin Li, Xingcheng Fu, Qingyun Sun, Cheng Ji, **Jiajun Tan**, Jia Wu, Hao Pen
 
 The 2022 ACM Web Conference, *Lyon, France*
 
-[**PDF**](https://dl.acm.org/doi/pdf/10.1145/3485447.3512199) | [**Code**](https://github.com/RingBDStack/CurvGAN) | <span class="paper-citation"><i class="ai ai-google-scholar" aria-hidden="true"></i><span class='show_paper_citations' data='PV3IC6wAAAAJ:u5HHmVD_uO8C'></span></span>
+[**PDF**](https://dl.acm.org/doi/pdf/10.1145/3485447.3512199) | [**Code**](https://github.com/RingBDStack/CurvGAN) | <a class="paper-citation" href="https://scholar.google.com/citations?view_op=view_citation&amp;hl=en&amp;user=PV3IC6wAAAAJ&amp;citation_for_view=PV3IC6wAAAAJ:u5HHmVD_uO8C" target="_blank" rel="noopener noreferrer" aria-label="View this paper on Google Scholar"><i class="ai ai-google-scholar" aria-hidden="true"></i><span class='show_paper_citations' data='PV3IC6wAAAAJ:u5HHmVD_uO8C'></span></a>
 </div>
 </div>
 
@@ -114,7 +114,7 @@ Xingcheng Fu, Jianxin Li, Jia Wu, Qingyun Sun, Cheng Ji, Senzhang Wang, **Jiajun
 2021 IEEE International Conference on Data Mining, *Auckland, New Zealand*
 **(Best paper candidate)**
 
-[**PDF**](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9679192) | [**Code**](https://github.com/RingBDStack/ACE-HGNN) | <span class="paper-citation"><i class="ai ai-google-scholar" aria-hidden="true"></i><span class='show_paper_citations' data='PV3IC6wAAAAJ:u-x6o8ySG0sC'></span></span>
+[**PDF**](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9679192) | [**Code**](https://github.com/RingBDStack/ACE-HGNN) | <a class="paper-citation" href="https://scholar.google.com/citations?view_op=view_citation&amp;hl=en&amp;user=PV3IC6wAAAAJ&amp;citation_for_view=PV3IC6wAAAAJ:u-x6o8ySG0sC" target="_blank" rel="noopener noreferrer" aria-label="View this paper on Google Scholar"><i class="ai ai-google-scholar" aria-hidden="true"></i><span class='show_paper_citations' data='PV3IC6wAAAAJ:u-x6o8ySG0sC'></span></a>
 </div>
 </div>
 

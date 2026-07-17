@@ -100,9 +100,16 @@
     vertical-align: middle;
     white-space: nowrap;
     transform: translateY(-0.08em);
+    text-decoration: none;
 
     &.is-loaded {
         display: inline-flex;
+    }
+
+    &:hover,
+    &:focus {
+        text-decoration: none;
+        filter: brightness(0.96);
     }
 
     .ai-google-scholar {
