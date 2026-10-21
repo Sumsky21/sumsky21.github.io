@@ -1,4 +1,6 @@
 *.json
+*cookies*.txt
+*.har
 .DS_Store
 /push.sh
 

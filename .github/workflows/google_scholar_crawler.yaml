@@ -38,7 +38,8 @@ jobs:
         run: timeout 3m python main.py
         env:
           GOOGLE_SCHOLAR_ID: ${{ secrets.GOOGLE_SCHOLAR_ID }}
-          SCRAPER_API_KEY: ${{ secrets.SCRAPER_API_KEY }}
+          GOOGLE_SCHOLAR_COOKIE: ${{ secrets.GOOGLE_SCHOLAR_COOKIE }}
+          GOOGLE_SCHOLAR_USER_AGENT: ${{ secrets.GOOGLE_SCHOLAR_USER_AGENT }}
 
       - name: Publish citation data
         working-directory: google_scholar_crawler/results

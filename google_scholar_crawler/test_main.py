@@ -4,6 +4,7 @@ from unittest.mock import Mock, patch
 import requests
 
 from main import describe_request_error, fetch_author, parse_author
+from scholar_cookies import validate_cookie_header
 
 
 PROFILE_HTML = """
@@ -70,28 +71,59 @@ class ParseAuthorTests(unittest.TestCase):
     def test_request_error_does_not_expose_api_key(self) -> None:
         response = requests.Response()
         response.status_code = 500
-        response.url = "https://api.scraperapi.com?api_key=secret-value"
+        response.url = "https://scholar.google.com/citations"
         error = requests.HTTPError(response=response)
 
         message = describe_request_error(error)
 
-        self.assertEqual(message, "ScraperAPI returned HTTP 500")
+        self.assertEqual(message, "Google Scholar returned HTTP 500")
         self.assertNotIn("secret-value", message)
 
     @patch("main.requests.get")
-    def test_fetch_uses_direct_api_with_bounded_timeout(self, get: Mock) -> None:
+    def test_fetch_sends_cookie_only_to_scholar(self, get: Mock) -> None:
         response = Mock()
+        response.status_code = 200
         response.text = PROFILE_HTML
         get.return_value = response
 
-        author = fetch_author("abc", "secret-value")
+        author = fetch_author("abc", "NID=secret-value", "Browser test")
 
         self.assertEqual(author["citedby"], 1234)
         get.assert_called_once()
-        _, kwargs = get.call_args
-        self.assertEqual(kwargs["params"]["api_key"], "secret-value")
-        self.assertIn("user=abc", kwargs["params"]["url"])
-        self.assertEqual(kwargs["timeout"], (10, 70))
+        args, kwargs = get.call_args
+        self.assertTrue(args[0].startswith("https://scholar.google.com/citations?"))
+        self.assertIn("user=abc", args[0])
+        self.assertNotIn("secret-value", args[0])
+        self.assertEqual(kwargs["headers"]["Cookie"], "NID=secret-value")
+        self.assertEqual(kwargs["headers"]["User-Agent"], "Browser test")
+        self.assertFalse(kwargs["allow_redirects"])
+        self.assertEqual(kwargs["timeout"], (10, 45))
+
+    @patch("main.requests.get")
+    def test_redirect_and_blocks_stop_without_retry(self, get: Mock) -> None:
+        for status in (302, 403, 429):
+            with self.subTest(status=status):
+                get.reset_mock()
+                get.return_value.status_code = status
+                with self.assertRaisesRegex(RuntimeError, f"HTTP {status}"):
+                    fetch_author("abc", "NID=secret-value")
+                get.assert_called_once()
+
+    def test_cookie_validation_rejects_header_injection(self) -> None:
+        self.assertEqual(validate_cookie_header("Cookie: NID=abc; SID=xyz"), "NID=abc; SID=xyz")
+        for value in ("", "NID=abc\r\nHost: example.com", "not-a-cookie"):
+            with self.subTest(value=value), self.assertRaises(ValueError):
+                validate_cookie_header(value)
+
+    @patch("main.time.sleep")
+    @patch("main.requests.get")
+    def test_transient_error_retries_without_leaking_cookie(self, get: Mock, sleep: Mock) -> None:
+        get.side_effect = requests.ConnectionError("NID=secret-value")
+        with self.assertRaises(RuntimeError) as caught:
+            fetch_author("abc", "NID=secret-value")
+        self.assertNotIn("secret-value", str(caught.exception))
+        self.assertEqual(get.call_count, 2)
+        sleep.assert_called_once_with(5)
 
 
 if __name__ == "__main__":

@@ -9,12 +9,13 @@ from urllib.parse import parse_qs, urljoin, urlparse
 import requests
 from bs4 import BeautifulSoup
 
+from scholar_cookies import validate_cookie_header
+
 
 MAX_ATTEMPTS = 2
 CONNECT_TIMEOUT_SECONDS = 10
-READ_TIMEOUT_SECONDS = 70
+READ_TIMEOUT_SECONDS = 45
 RESULTS_DIR = Path(__file__).resolve().parent / "results"
-SCRAPER_API_URL = "https://api.scraperapi.com"
 SCHOLAR_PROFILE_URL = "https://scholar.google.com/citations"
 
 
@@ -112,18 +113,22 @@ def parse_author(html: str, scholar_id: str) -> dict:
 
 
 def describe_request_error(error: requests.RequestException) -> str:
-    """Return an error message that cannot expose the ScraperAPI key."""
+    """Return an error message without request headers or cookie values."""
     if isinstance(error, requests.Timeout):
-        return "ScraperAPI request timed out"
+        return "Google Scholar request timed out"
     if isinstance(error, requests.HTTPError) and error.response is not None:
-        return f"ScraperAPI returned HTTP {error.response.status_code}"
+        return f"Google Scholar returned HTTP {error.response.status_code}"
     if isinstance(error, requests.ConnectionError):
-        return "Could not connect to ScraperAPI"
-    return f"ScraperAPI request failed ({type(error).__name__})"
+        return "Could not connect to Google Scholar"
+    return f"Google Scholar request failed ({type(error).__name__})"
 
 
-def fetch_author(scholar_id: str, api_key: str) -> dict:
-    """Fetch and parse an author profile through ScraperAPI."""
+def fetch_author(scholar_id: str, cookie: str, user_agent: str = "") -> dict:
+    """Fetch a Scholar profile directly using a browser Cookie header."""
+    cookie = validate_cookie_header(cookie)
+    headers = {"Cookie": cookie, "Accept-Language": "en-US,en;q=0.9"}
+    if user_agent:
+        headers["User-Agent"] = user_agent
     target_request = requests.Request(
         "GET",
         SCHOLAR_PROFILE_URL,
@@ -139,20 +144,27 @@ def fetch_author(scholar_id: str, api_key: str) -> dict:
         )
         try:
             response = requests.get(
-                SCRAPER_API_URL,
-                params={
-                    "api_key": api_key,
-                    "url": target_request.url,
-                    "country_code": "us",
-                },
+                target_request.url,
+                headers=headers,
+                # Do not forward the raw Cookie header to a redirect destination.
+                allow_redirects=False,
                 timeout=(CONNECT_TIMEOUT_SECONDS, READ_TIMEOUT_SECONDS),
             )
+            if response.status_code in (301, 302, 303, 307, 308, 401, 403, 429):
+                raise RuntimeError(
+                    f"Google Scholar returned HTTP {response.status_code}. "
+                    "Refresh the browser Cookie secret; Actions IP may still be blocked."
+                )
             response.raise_for_status()
             return parse_author(response.text, scholar_id)
         except requests.RequestException as error:
             last_error = describe_request_error(error)
         except RuntimeError as error:
-            last_error = str(error)
+            # Repeating a CAPTCHA or blocked response does not refresh a browser session.
+            raise RuntimeError(
+                f"{error}. Open Scholar in your browser, complete any verification, "
+                "and upload a fresh Cookie header."
+            ) from None
 
         print(f"Attempt {attempt} failed: {last_error}", flush=True)
         if attempt < MAX_ATTEMPTS:
@@ -194,13 +206,15 @@ def main() -> None:
             "GOOGLE_SCHOLAR_ID is not set. Add it as a GitHub Actions secret."
         )
 
-    scraper_api_key = os.environ.get("SCRAPER_API_KEY", "").strip()
-    if not scraper_api_key:
+    cookie = os.environ.get("GOOGLE_SCHOLAR_COOKIE", "").strip()
+    if not cookie:
         raise RuntimeError(
-            "SCRAPER_API_KEY is not set. Add it as a GitHub Actions secret."
+            "GOOGLE_SCHOLAR_COOKIE is not set. Run upload_cookies.py locally first."
         )
 
-    author = fetch_author(scholar_id, scraper_api_key)
+    author = fetch_author(
+        scholar_id, cookie, os.environ.get("GOOGLE_SCHOLAR_USER_AGENT", "").strip()
+    )
     write_results(author)
     print(
         f"Saved {len(author['publications'])} publications and "
