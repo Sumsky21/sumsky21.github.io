@@ -30,7 +30,7 @@ concurrency:
 
 jobs:
   build:
-    runs-on: ubuntu-24.04
+    runs-on: macos-15
     timeout-minutes: 10
     env:
       SCHOLAR_BROWSER: ${{ inputs.browser || 'chromium' }}
@@ -51,8 +51,8 @@ jobs:
       - name: Install selected browser
         run: |
           case "$SCHOLAR_BROWSER" in
-            chromium) python -m playwright install --with-deps --no-shell chromium ;;
-            firefox|webkit) python -m playwright install --with-deps "$SCHOLAR_BROWSER" ;;
+            chromium) python -m playwright install --no-shell chromium ;;
+            firefox|webkit) python -m playwright install "$SCHOLAR_BROWSER" ;;
             *) echo "Unsupported browser"; exit 1 ;;
           esac
 
@@ -64,7 +64,8 @@ jobs:
 
       - name: Fetch citation data
         working-directory: google_scholar_crawler
-        run: timeout 3m python main.py
+        timeout-minutes: 3
+        run: python main.py
         env:
           GOOGLE_SCHOLAR_ID: ${{ secrets.GOOGLE_SCHOLAR_ID }}
           GOOGLE_SCHOLAR_COOKIE: ${{ inputs.auth_mode == 'cookie' && secrets.GOOGLE_SCHOLAR_COOKIE || '' }}

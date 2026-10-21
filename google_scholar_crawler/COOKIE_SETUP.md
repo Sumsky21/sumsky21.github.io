@@ -9,6 +9,10 @@
 选择 `auth_mode: anonymous`；`browser` 选择与上次测试相同的浏览器，以便只比较 Cookie 的影响。
 日志会明确显示 `[anonymous]`。
 
+当前已切换为 GitHub 托管的 `macos-15`，并非本地 Mac。
+本次与 Ubuntu 作对照时，请选择 `auth_mode: anonymous`、`browser: webkit`，
+与上次 Ubuntu 上的 WebKit 匿名请求保持一致，只更换 runner 环境。
+
 匿名模式只需要 `GOOGLE_SCHOLAR_ID` Secret。已有的 `GOOGLE_SCHOLAR_COOKIE` 无需删除，
 该模式不会将它传给抓取进程，也不会读取它。站点在访问过程中正常设置的 Cookie 仍由浏览器管理。
 每周定时任务也默认匿名访问。
@@ -67,9 +71,12 @@ Cookie 含浏览器会话凭据，应只从本机上传到你信任的私有 Sec
 默认 `auth_mode` 为 `anonymous`；只有选择 `cookie` 时才使用上传的 Cookie。
 脚本上传 Cookie 不会自动推送代码或触发 workflow。
 
-workflow 固定使用 GitHub 托管的 `ubuntu-24.04`。每次运行只安装所选浏览器及系统依赖，
+workflow 固定使用 GitHub 托管的 `macos-15`。每次运行只安装所选 Playwright 浏览器，
 先执行单元测试和该浏览器的模拟页面测试，再抓取引用数据。现有每周一的定时触发保持不变。
 本次匿名对照只需要推送代码并创建新任务，无需上传 Cookie。
+
+抓取步骤由 Actions 原生 `timeout-minutes: 3` 限时，无需 macOS 额外安装 GNU `timeout`。
+整个 job 的超时仍为 10 分钟。切换 runner 不代表已解决 Scholar 的 403，需以真实抓取日志为准。
 
 成功时仍写入 `results/gs_data.json` 和 `results/gs_data_shieldsio.json`，
 随后 workflow 发布到 `google-scholar-stats` 分支。
