@@ -22,20 +22,28 @@ class BrowserSmokeTests(unittest.TestCase):
             try:
                 context = browser.new_context(locale="en-US")
                 context.add_cookies(browser_cookies("NID=synthetic-cookie"))
-                sent_cookies = []
+                profile_url = "https://scholar.google.com/citations?user=abc"
+                stored_cookies = {
+                    cookie["name"]: cookie["value"]
+                    for cookie in context.cookies([profile_url])
+                }
+                self.assertEqual(stored_cookies.get("NID"), "synthetic-cookie")
+                self.assertEqual(context.cookies(["https://example.org/"]), [])
 
                 def profile_route(route):
-                    sent_cookies.append(route.request.all_headers().get("cookie", ""))
+                    # Routing happens before the network stack attaches cookies.
+                    # A fulfilled request never goes over the wire, so its Cookie
+                    # header cannot be used to assert actual cookie transmission.
                     route.fulfill(status=200, content_type="text/html", body=PROFILE_HTML)
 
                 # No request reaches Google or any other external site.
                 context.route("**/*", profile_route)
                 page = context.new_page()
-                page.goto("https://scholar.google.com/citations?user=abc", wait_until="domcontentloaded")
+                page.goto(profile_url, wait_until="domcontentloaded")
                 author = parse_author(page.content(), "abc")
                 self.assertEqual(author["citedby"], 1234)
                 self.assertEqual(len(author["publications"]), 2)
-                self.assertTrue(any("NID=synthetic-cookie" in value for value in sent_cookies))
+                self.assertIn("NID=synthetic-cookie", page.evaluate("document.cookie"))
                 context.close()
             finally:
                 browser.close()

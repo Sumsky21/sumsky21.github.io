@@ -1,4 +1,6 @@
 import unittest
+from contextlib import redirect_stdout
+from io import StringIO
 from unittest.mock import Mock, patch
 
 from playwright.sync_api import TimeoutError as BrowserTimeout
@@ -8,6 +10,12 @@ from browser_fetch import browser_cookies, fetch_profile_html, selected_browser
 
 @patch.dict("os.environ", {"SCHOLAR_BROWSER": "chromium"})
 class BrowserFetchTests(unittest.TestCase):
+    def setUp(self):
+        # Mock HTTP responses are test fixtures, not real Scholar requests.
+        output = redirect_stdout(StringIO())
+        output.__enter__()
+        self.addCleanup(output.__exit__, None, None, None)
+
     def test_cookie_values_and_domain_scope(self):
         cookies = browser_cookies("NID=abc==; SID=xyz")
         self.assertEqual(cookies, [
