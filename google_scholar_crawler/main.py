@@ -1,22 +1,16 @@
 import json
 import os
 import re
-import time
 from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import parse_qs, urljoin, urlparse
 
-import requests
 from bs4 import BeautifulSoup
 
-from scholar_cookies import validate_cookie_header
+from browser_fetch import fetch_profile_html
 
 
-MAX_ATTEMPTS = 2
-CONNECT_TIMEOUT_SECONDS = 10
-READ_TIMEOUT_SECONDS = 45
 RESULTS_DIR = Path(__file__).resolve().parent / "results"
-SCHOLAR_PROFILE_URL = "https://scholar.google.com/citations"
 
 
 def parse_count(value: str) -> int:
@@ -112,68 +106,9 @@ def parse_author(html: str, scholar_id: str) -> dict:
     return author
 
 
-def describe_request_error(error: requests.RequestException) -> str:
-    """Return an error message without request headers or cookie values."""
-    if isinstance(error, requests.Timeout):
-        return "Google Scholar request timed out"
-    if isinstance(error, requests.HTTPError) and error.response is not None:
-        return f"Google Scholar returned HTTP {error.response.status_code}"
-    if isinstance(error, requests.ConnectionError):
-        return "Could not connect to Google Scholar"
-    return f"Google Scholar request failed ({type(error).__name__})"
-
-
-def fetch_author(scholar_id: str, cookie: str, user_agent: str = "") -> dict:
-    """Fetch a Scholar profile directly using a browser Cookie header."""
-    cookie = validate_cookie_header(cookie)
-    headers = {"Cookie": cookie, "Accept-Language": "en-US,en;q=0.9"}
-    if user_agent:
-        headers["User-Agent"] = user_agent
-    target_request = requests.Request(
-        "GET",
-        SCHOLAR_PROFILE_URL,
-        params={"hl": "en", "user": scholar_id, "pagesize": 100},
-    ).prepare()
-    last_error = "unknown error"
-
-    for attempt in range(1, MAX_ATTEMPTS + 1):
-        print(
-            f"Fetching Google Scholar profile "
-            f"(attempt {attempt}/{MAX_ATTEMPTS})...",
-            flush=True,
-        )
-        try:
-            response = requests.get(
-                target_request.url,
-                headers=headers,
-                # Do not forward the raw Cookie header to a redirect destination.
-                allow_redirects=False,
-                timeout=(CONNECT_TIMEOUT_SECONDS, READ_TIMEOUT_SECONDS),
-            )
-            if response.status_code in (301, 302, 303, 307, 308, 401, 403, 429):
-                raise RuntimeError(
-                    f"Google Scholar returned HTTP {response.status_code}. "
-                    "Refresh the browser Cookie secret; Actions IP may still be blocked."
-                )
-            response.raise_for_status()
-            return parse_author(response.text, scholar_id)
-        except requests.RequestException as error:
-            last_error = describe_request_error(error)
-        except RuntimeError as error:
-            # Repeating a CAPTCHA or blocked response does not refresh a browser session.
-            raise RuntimeError(
-                f"{error}. Open Scholar in your browser, complete any verification, "
-                "and upload a fresh Cookie header."
-            ) from None
-
-        print(f"Attempt {attempt} failed: {last_error}", flush=True)
-        if attempt < MAX_ATTEMPTS:
-            time.sleep(5)
-
-    raise RuntimeError(
-        f"Google Scholar data could not be fetched after "
-        f"{MAX_ATTEMPTS} attempts: {last_error}"
-    )
+def fetch_author(scholar_id: str, cookie: str) -> dict:
+    """Fetch the profile in Chromium and retain the website's JSON format."""
+    return parse_author(fetch_profile_html(scholar_id, cookie), scholar_id)
 
 
 def write_results(author: dict) -> None:
@@ -212,9 +147,7 @@ def main() -> None:
             "GOOGLE_SCHOLAR_COOKIE is not set. Run upload_cookies.py locally first."
         )
 
-    author = fetch_author(
-        scholar_id, cookie, os.environ.get("GOOGLE_SCHOLAR_USER_AGENT", "").strip()
-    )
+    author = fetch_author(scholar_id, cookie)
     write_results(author)
     print(
         f"Saved {len(author['publications'])} publications and "
