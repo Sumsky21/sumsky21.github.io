@@ -1,3 +1,5 @@
 scholarly==1.7.11
+# scholarly 1.7.11 uses the bibtexparser v1 API removed in v2.
+bibtexparser==1.4.4
 # scholarly 1.7.11 still calls the proxies= API removed in httpx 0.28.
 httpx==0.27.2
