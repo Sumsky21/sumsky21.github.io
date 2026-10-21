@@ -35,6 +35,10 @@ gh secret set SERPAPI_API_KEY --repo Sumsky21/sumsky21.github.io
 自动更新频率仍为每周一 UTC 08:00（北京时间 16:00）。成功后发布
 `gs_data.json` 与 `gs_data_shieldsio.json` 到 `google-scholar-stats` 分支，网页读取格式不变。
 
+主页默认直接从 GitHub Raw 读取引用数，并禁用该 JSON 请求的浏览器缓存。
+不要为这些动态数据启用 `google_scholar_stats_use_cdn`：jsDelivr 的分支缓存可能仍返回旧数据。
+首次修改主页读取方式需要推送代码并等待 Pages 部署；后续引用数更新只需刷新页面。
+
 ## 失败时的行为
 
 - 缺少 Key、认证失败或额度限制会明确报错。401/403 检查账户及 Key；429 检查月额度和小时限制。

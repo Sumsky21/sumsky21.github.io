@@ -9,7 +9,8 @@
 title                    : "Jiajun Tan"
 description              : "PhD student at ICT, CAS"
 repository               : "Sumsky21/sumsky21.github.io"
-google_scholar_stats_use_cdn : true
+# Citation data changes on this branch; avoid jsDelivr's long-lived branch cache.
+google_scholar_stats_use_cdn : false
 
 # google analytics
 google_analytics_id      :  # get google_analytics_id from https://analytics.google.com/analytics/
