@@ -3,6 +3,13 @@ name: Get Citation Data
 on:
   workflow_dispatch:
     inputs:
+      auth_mode:
+        description: Anonymous access or imported browser Cookie
+        type: choice
+        default: anonymous
+        options:
+          - anonymous
+          - cookie
       browser:
         description: Browser used to fetch Google Scholar
         type: choice
@@ -27,6 +34,7 @@ jobs:
     timeout-minutes: 10
     env:
       SCHOLAR_BROWSER: ${{ inputs.browser || 'chromium' }}
+      SCHOLAR_AUTH_MODE: ${{ inputs.auth_mode || 'anonymous' }}
     steps:
       - uses: actions/checkout@v6
 
@@ -59,7 +67,7 @@ jobs:
         run: timeout 3m python main.py
         env:
           GOOGLE_SCHOLAR_ID: ${{ secrets.GOOGLE_SCHOLAR_ID }}
-          GOOGLE_SCHOLAR_COOKIE: ${{ secrets.GOOGLE_SCHOLAR_COOKIE }}
+          GOOGLE_SCHOLAR_COOKIE: ${{ inputs.auth_mode == 'cookie' && secrets.GOOGLE_SCHOLAR_COOKIE || '' }}
 
       - name: Publish citation data
         working-directory: google_scholar_crawler/results

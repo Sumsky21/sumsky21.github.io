@@ -1,8 +1,20 @@
-# 在 GitHub Actions 中使用浏览器 Cookie 抓取 Google Scholar
+# 在 GitHub Actions 中抓取 Google Scholar：匿名 / Cookie 对照
 
 数据仍来自 Google Scholar。GitHub 托管 runner 使用 Playwright 启动所选浏览器，
-导入 Cookie 后访问 Scholar，不使用 ScraperAPI。
-本地脚本将浏览器请求的 Cookie 上传为仓库 Actions Secret。
+默认在全新浏览器上下文中匿名访问，不导入本机 Cookie，不使用 ScraperAPI。
+
+## 当前默认：匿名访问
+
+推送代码后，从 **Actions → Get Citation Data → Run workflow → main** 创建新任务。
+选择 `auth_mode: anonymous`；`browser` 选择与上次测试相同的浏览器，以便只比较 Cookie 的影响。
+日志会明确显示 `[anonymous]`。
+
+匿名模式只需要 `GOOGLE_SCHOLAR_ID` Secret。已有的 `GOOGLE_SCHOLAR_COOKIE` 无需删除，
+该模式不会将它传给抓取进程，也不会读取它。站点在访问过程中正常设置的 Cookie 仍由浏览器管理。
+每周定时任务也默认匿名访问。
+
+若要对照原来的 Cookie 模式，手动选择 `auth_mode: cookie`；日志会显示 `[imported-cookie]`。
+此模式才会读取现有 Cookie Secret。以下是 Cookie 模式的可选设置步骤。
 
 ## 1. 准备 GitHub CLI
 
@@ -52,11 +64,12 @@ Cookie 含浏览器会话凭据，应只从本机上传到你信任的私有 Sec
 默认和每周定时任务仍使用 `chromium`，单次手动选择不会改变定时任务配置。
 如果 Firefox 的真实抓取成功，可再将 workflow 中定时任务的默认浏览器切换为 Firefox。
 保留现有 `GOOGLE_SCHOLAR_ID` Secret；不再需要 `SCRAPER_API_KEY`。
+默认 `auth_mode` 为 `anonymous`；只有选择 `cookie` 时才使用上传的 Cookie。
 脚本上传 Cookie 不会自动推送代码或触发 workflow。
 
 workflow 固定使用 GitHub 托管的 `ubuntu-24.04`。每次运行只安装所选浏览器及系统依赖，
 先执行单元测试和该浏览器的模拟页面测试，再抓取引用数据。现有每周一的定时触发保持不变。
-如果已经上传过有效 Cookie，本次只需要推送代码并创建新任务，无需重新上传。
+本次匿名对照只需要推送代码并创建新任务，无需上传 Cookie。
 
 成功时仍写入 `results/gs_data.json` 和 `results/gs_data_shieldsio.json`，
 随后 workflow 发布到 `google-scholar-stats` 分支。

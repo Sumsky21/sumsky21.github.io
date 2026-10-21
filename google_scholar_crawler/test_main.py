@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import Mock, patch
 
-from main import fetch_author, parse_author
+from main import fetch_author, main, parse_author
 from scholar_cookies import validate_cookie_header
 
 
@@ -77,6 +77,28 @@ class ParseAuthorTests(unittest.TestCase):
         for value in ("", "NID=abc\r\nHost: example.com", "not-a-cookie"):
             with self.subTest(value=value), self.assertRaises(ValueError):
                 validate_cookie_header(value)
+
+    @patch.dict("os.environ", {
+        "GOOGLE_SCHOLAR_ID": "abc",
+        "GOOGLE_SCHOLAR_COOKIE": "NID=should-not-be-used",
+    }, clear=True)
+    @patch("main.write_results")
+    @patch("main.fetch_author", return_value={"citedby": 42, "publications": []})
+    def test_anonymous_default_ignores_existing_cookie_secret(self, fetch, write):
+        with patch("builtins.print"):
+            main()
+        fetch.assert_called_once_with("abc", "")
+        write.assert_called_once()
+
+    @patch.dict("os.environ", {
+        "GOOGLE_SCHOLAR_ID": "abc",
+        "SCHOLAR_AUTH_MODE": "cookie",
+    }, clear=True)
+    @patch("main.fetch_author")
+    def test_explicit_cookie_mode_requires_cookie(self, fetch):
+        with self.assertRaisesRegex(RuntimeError, "Cookie mode requires"):
+            main()
+        fetch.assert_not_called()
 
 if __name__ == "__main__":
     unittest.main()

@@ -41,6 +41,15 @@ class BrowserFetchTests(unittest.TestCase):
         context.close.assert_called_once()
         browser.close.assert_called_once()
 
+    @patch("browser_fetch.sync_playwright")
+    def test_anonymous_context_does_not_import_cookies(self, factory):
+        browser, context, page = self.make_browser(factory)
+        self.assertEqual(fetch_profile_html("abc"), "<html>profile</html>")
+        context.add_cookies.assert_not_called()
+        page.goto.assert_called_once()
+        context.close.assert_called_once()
+        browser.close.assert_called_once()
+
     @patch("browser_fetch.time.sleep")
     @patch("browser_fetch.sync_playwright")
     def test_explicit_block_is_not_retried(self, factory, sleep):

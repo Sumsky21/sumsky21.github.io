@@ -43,7 +43,7 @@ def check_page(page, response, browser_label="Chromium") -> None:
     if response.status in (401, 403, 429):
         raise RuntimeError(
             f"Google Scholar returned HTTP {response.status} in {browser_label}. "
-            "The hosted runner request is blocked; copying Cookie alone did not resolve it."
+            "Scholar rejected this browser request; the HTTP status alone does not identify the cause."
         )
     location = urlparse(page.url)
     if location.hostname != "scholar.google.com" or location.path.startswith("/sorry"):
@@ -52,11 +52,12 @@ def check_page(page, response, browser_label="Chromium") -> None:
         raise RuntimeError(f"Google Scholar requires interactive verification in {browser_label}.")
 
 
-def fetch_profile_html(scholar_id: str, cookie: str) -> str:
+def fetch_profile_html(scholar_id: str, cookie: str = "") -> str:
     """Use a browser context with its native user agent and cookie store."""
     browser_name = selected_browser()
     browser_label = BROWSER_LABELS[browser_name]
-    cookies = browser_cookies(cookie)
+    cookies = browser_cookies(cookie) if cookie else []
+    session_mode = "imported-cookie" if cookies else "anonymous"
     url = PROFILE_ORIGIN + "/citations?" + urlencode(
         {"hl": "en", "user": scholar_id, "pagesize": 100}
     )
@@ -70,10 +71,15 @@ def fetch_profile_html(scholar_id: str, cookie: str) -> str:
             browser = browser_type.launch(**launch_options)
             try:
                 for attempt in range(1, MAX_ATTEMPTS + 1):
-                    print(f"Fetching Scholar with {browser_label} (attempt {attempt}/{MAX_ATTEMPTS})...", flush=True)
+                    print(
+                        f"Fetching Scholar with {browser_label} [{session_mode}] "
+                        f"(attempt {attempt}/{MAX_ATTEMPTS})...",
+                        flush=True,
+                    )
                     context = browser.new_context(locale="en-US")
                     try:
-                        context.add_cookies(cookies)
+                        if cookies:
+                            context.add_cookies(cookies)
                         page = context.new_page()
                         response = page.goto(
                             url, wait_until="domcontentloaded", timeout=NAVIGATION_TIMEOUT_MS

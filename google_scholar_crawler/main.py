@@ -106,7 +106,7 @@ def parse_author(html: str, scholar_id: str) -> dict:
     return author
 
 
-def fetch_author(scholar_id: str, cookie: str) -> dict:
+def fetch_author(scholar_id: str, cookie: str = "") -> dict:
     """Fetch the profile in a browser and retain the website's JSON format."""
     return parse_author(fetch_profile_html(scholar_id, cookie), scholar_id)
 
@@ -141,11 +141,16 @@ def main() -> None:
             "GOOGLE_SCHOLAR_ID is not set. Add it as a GitHub Actions secret."
         )
 
-    cookie = os.environ.get("GOOGLE_SCHOLAR_COOKIE", "").strip()
-    if not cookie:
-        raise RuntimeError(
-            "GOOGLE_SCHOLAR_COOKIE is not set. Run upload_cookies.py locally first."
-        )
+    auth_mode = os.environ.get("SCHOLAR_AUTH_MODE", "anonymous").strip().lower()
+    if auth_mode not in ("anonymous", "cookie"):
+        raise RuntimeError("SCHOLAR_AUTH_MODE must be anonymous or cookie.")
+    cookie = ""
+    if auth_mode == "cookie":
+        cookie = os.environ.get("GOOGLE_SCHOLAR_COOKIE", "").strip()
+        if not cookie:
+            raise RuntimeError(
+                "Cookie mode requires GOOGLE_SCHOLAR_COOKIE. Run upload_cookies.py locally first."
+            )
 
     author = fetch_author(scholar_id, cookie)
     write_results(author)
