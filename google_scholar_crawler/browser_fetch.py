@@ -1,5 +1,6 @@
-"""Fetch Scholar HTML with Chromium on GitHub-hosted runners."""
+"""Fetch Scholar HTML with a selected browser on GitHub-hosted runners."""
 
+import os
 import time
 from urllib.parse import urlencode, urlparse
 
@@ -14,6 +15,14 @@ PROFILE_ORIGIN = "https://scholar.google.com"
 MAX_ATTEMPTS = 2
 NAVIGATION_TIMEOUT_MS = 45000
 CONTENT_TIMEOUT_MS = 15000
+BROWSER_LABELS = {"chromium": "Chromium", "firefox": "Firefox", "webkit": "WebKit"}
+
+
+def selected_browser() -> str:
+    name = os.environ.get("SCHOLAR_BROWSER", "chromium").strip().lower()
+    if name not in BROWSER_LABELS:
+        raise ValueError("SCHOLAR_BROWSER must be chromium, firefox, or webkit.")
+    return name
 
 
 def browser_cookies(header: str) -> list:
@@ -26,36 +35,42 @@ def browser_cookies(header: str) -> list:
     return list(cookies.values())
 
 
-def check_page(page, response) -> None:
+def check_page(page, response, browser_label="Chromium") -> None:
     """Reject explicit blocks without repeatedly hitting the same challenge."""
     if response is None:
         raise RuntimeError("Scholar navigation returned no HTTP response.")
     print(f"Scholar document HTTP {response.status}", flush=True)
     if response.status in (401, 403, 429):
         raise RuntimeError(
-            f"Google Scholar returned HTTP {response.status} in Chromium. "
+            f"Google Scholar returned HTTP {response.status} in {browser_label}. "
             "The hosted runner request is blocked; copying Cookie alone did not resolve it."
         )
     location = urlparse(page.url)
     if location.hostname != "scholar.google.com" or location.path.startswith("/sorry"):
         raise RuntimeError("Google Scholar redirected to a verification or login page.")
     if page.locator("#gs_captcha_f, #gs_captcha_ccl, iframe[src*='recaptcha']").count():
-        raise RuntimeError("Google Scholar requires interactive verification in Chromium.")
+        raise RuntimeError(f"Google Scholar requires interactive verification in {browser_label}.")
 
 
 def fetch_profile_html(scholar_id: str, cookie: str) -> str:
-    """Use an actual Chromium context with its native user agent and cookie store."""
+    """Use a browser context with its native user agent and cookie store."""
+    browser_name = selected_browser()
+    browser_label = BROWSER_LABELS[browser_name]
     cookies = browser_cookies(cookie)
     url = PROFILE_ORIGIN + "/citations?" + urlencode(
         {"hl": "en", "user": scholar_id, "pagesize": 100}
     )
     try:
         with sync_playwright() as playwright:
-            # Use full Chromium's modern headless mode, not an HTTP UA override.
-            browser = playwright.chromium.launch(channel="chromium", headless=True)
+            browser_type = getattr(playwright, browser_name)
+            launch_options = {"headless": True, "timeout": 30000}
+            if browser_name == "chromium":
+                # Use full Chromium's modern headless mode.
+                launch_options["channel"] = "chromium"
+            browser = browser_type.launch(**launch_options)
             try:
                 for attempt in range(1, MAX_ATTEMPTS + 1):
-                    print(f"Fetching Scholar with Chromium (attempt {attempt}/{MAX_ATTEMPTS})...", flush=True)
+                    print(f"Fetching Scholar with {browser_label} (attempt {attempt}/{MAX_ATTEMPTS})...", flush=True)
                     context = browser.new_context(locale="en-US")
                     try:
                         context.add_cookies(cookies)
@@ -63,7 +78,7 @@ def fetch_profile_html(scholar_id: str, cookie: str) -> str:
                         response = page.goto(
                             url, wait_until="domcontentloaded", timeout=NAVIGATION_TIMEOUT_MS
                         )
-                        check_page(page, response)
+                        check_page(page, response, browser_label)
                         if response.status >= 500:
                             if attempt == MAX_ATTEMPTS:
                                 raise RuntimeError(f"Google Scholar returned HTTP {response.status} twice.")
@@ -81,7 +96,7 @@ def fetch_profile_html(scholar_id: str, cookie: str) -> str:
                             return page.content()
                     except BrowserTimeout:
                         if attempt == MAX_ATTEMPTS:
-                            raise RuntimeError("Chromium timed out loading the Scholar profile twice.") from None
+                            raise RuntimeError(f"{browser_label} timed out loading the Scholar profile twice.") from None
                         print("Scholar page timed out; retrying once.", flush=True)
                     finally:
                         context.close()
@@ -91,6 +106,6 @@ def fetch_profile_html(scholar_id: str, cookie: str) -> str:
     except BrowserError:
         # Playwright errors can contain URLs; never dump imported session data.
         raise RuntimeError(
-            "Chromium failed to start or navigate. Ensure Playwright Chromium and system dependencies are installed."
+            f"{browser_label} failed to start or navigate. Ensure its Playwright browser and system dependencies are installed."
         ) from None
-    raise RuntimeError("Chromium could not fetch the Scholar profile.")
+    raise RuntimeError(f"{browser_label} could not fetch the Scholar profile.")

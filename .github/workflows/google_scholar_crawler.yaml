@@ -2,6 +2,15 @@ name: Get Citation Data
 
 on:
   workflow_dispatch:
+    inputs:
+      browser:
+        description: Browser used to fetch Google Scholar
+        type: choice
+        default: chromium
+        options:
+          - chromium
+          - firefox
+          - webkit
   schedule:
     - cron: "0 8 * * 1"
 
@@ -16,6 +25,8 @@ jobs:
   build:
     runs-on: ubuntu-24.04
     timeout-minutes: 10
+    env:
+      SCHOLAR_BROWSER: ${{ inputs.browser || 'chromium' }}
     steps:
       - uses: actions/checkout@v6
 
@@ -29,8 +40,13 @@ jobs:
       - name: Install dependencies
         run: python -m pip install -r google_scholar_crawler/requirements.txt
 
-      - name: Install Chromium
-        run: python -m playwright install --with-deps --no-shell chromium
+      - name: Install selected browser
+        run: |
+          case "$SCHOLAR_BROWSER" in
+            chromium) python -m playwright install --with-deps --no-shell chromium ;;
+            firefox|webkit) python -m playwright install --with-deps "$SCHOLAR_BROWSER" ;;
+            *) echo "Unsupported browser"; exit 1 ;;
+          esac
 
       - name: Test crawler
         working-directory: google_scholar_crawler

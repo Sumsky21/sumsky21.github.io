@@ -3,9 +3,10 @@ from unittest.mock import Mock, patch
 
 from playwright.sync_api import TimeoutError as BrowserTimeout
 
-from browser_fetch import browser_cookies, fetch_profile_html
+from browser_fetch import browser_cookies, fetch_profile_html, selected_browser
 
 
+@patch.dict("os.environ", {"SCHOLAR_BROWSER": "chromium"})
 class BrowserFetchTests(unittest.TestCase):
     def test_cookie_values_and_domain_scope(self):
         cookies = browser_cookies("NID=abc==; SID=xyz")
@@ -14,8 +15,8 @@ class BrowserFetchTests(unittest.TestCase):
             {"name": "SID", "value": "xyz", "url": "https://scholar.google.com/"},
         ])
 
-    def make_browser(self, factory, status=200):
-        browser = factory.return_value.__enter__.return_value.chromium.launch.return_value
+    def make_browser(self, factory, status=200, browser_name="chromium"):
+        browser = getattr(factory.return_value.__enter__.return_value, browser_name).launch.return_value
         context = browser.new_context.return_value
         page = context.new_page.return_value
         page.goto.return_value.status = status
@@ -61,6 +62,22 @@ class BrowserFetchTests(unittest.TestCase):
         self.assertEqual(page.goto.call_count, 2)
         self.assertEqual(context.close.call_count, 2)
         sleep.assert_called_once_with(5)
+
+    @patch("browser_fetch.sync_playwright")
+    def test_alternate_browser_is_launched_without_chromium_channel(self, factory):
+        for name in ("firefox", "webkit"):
+            with self.subTest(browser=name), patch.dict("os.environ", {"SCHOLAR_BROWSER": name}):
+                factory.reset_mock()
+                self.make_browser(factory, browser_name=name)
+                self.assertEqual(fetch_profile_html("abc", "NID=secret"), "<html>profile</html>")
+                engine = factory.return_value.__enter__.return_value
+                getattr(engine, name).launch.assert_called_once_with(headless=True, timeout=30000)
+                engine.chromium.launch.assert_not_called()
+
+    def test_invalid_browser_is_rejected(self):
+        with patch.dict("os.environ", {"SCHOLAR_BROWSER": "unknown"}):
+            with self.assertRaisesRegex(ValueError, "SCHOLAR_BROWSER"):
+                selected_browser()
 
 
 if __name__ == "__main__":

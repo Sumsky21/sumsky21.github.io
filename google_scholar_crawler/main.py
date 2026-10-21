@@ -107,7 +107,7 @@ def parse_author(html: str, scholar_id: str) -> dict:
 
 
 def fetch_author(scholar_id: str, cookie: str) -> dict:
-    """Fetch the profile in Chromium and retain the website's JSON format."""
+    """Fetch the profile in a browser and retain the website's JSON format."""
     return parse_author(fetch_profile_html(scholar_id, cookie), scholar_id)
 
 
