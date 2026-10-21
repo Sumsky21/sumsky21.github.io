@@ -2,22 +2,6 @@ name: Get Citation Data
 
 on:
   workflow_dispatch:
-    inputs:
-      auth_mode:
-        description: Anonymous access or imported browser Cookie
-        type: choice
-        default: anonymous
-        options:
-          - anonymous
-          - cookie
-      browser:
-        description: Browser used to fetch Google Scholar
-        type: choice
-        default: chromium
-        options:
-          - chromium
-          - firefox
-          - webkit
   schedule:
     - cron: "0 8 * * 1"
 
@@ -30,11 +14,10 @@ concurrency:
 
 jobs:
   build:
-    runs-on: macos-15
+    runs-on: ubuntu-latest
     timeout-minutes: 10
     env:
-      SCHOLAR_BROWSER: ${{ inputs.browser || 'chromium' }}
-      SCHOLAR_AUTH_MODE: ${{ inputs.auth_mode || 'anonymous' }}
+      SCHOLAR_PROVIDER: serpapi
     steps:
       - uses: actions/checkout@v6
 
@@ -48,19 +31,9 @@ jobs:
       - name: Install dependencies
         run: python -m pip install -r google_scholar_crawler/requirements.txt
 
-      - name: Install selected browser
-        run: |
-          case "$SCHOLAR_BROWSER" in
-            chromium) python -m playwright install --no-shell chromium ;;
-            firefox|webkit) python -m playwright install "$SCHOLAR_BROWSER" ;;
-            *) echo "Unsupported browser"; exit 1 ;;
-          esac
-
       - name: Test crawler
         working-directory: google_scholar_crawler
         run: python -m unittest discover -p "test_*.py"
-        env:
-          SCHOLAR_BROWSER_SMOKE: "1"
 
       - name: Fetch citation data
         working-directory: google_scholar_crawler
@@ -68,7 +41,7 @@ jobs:
         run: python main.py
         env:
           GOOGLE_SCHOLAR_ID: ${{ secrets.GOOGLE_SCHOLAR_ID }}
-          GOOGLE_SCHOLAR_COOKIE: ${{ inputs.auth_mode == 'cookie' && secrets.GOOGLE_SCHOLAR_COOKIE || '' }}
+          SERPAPI_API_KEY: ${{ secrets.SERPAPI_API_KEY }}
 
       - name: Publish citation data
         working-directory: google_scholar_crawler/results

@@ -8,6 +8,7 @@ from urllib.parse import parse_qs, urljoin, urlparse
 from bs4 import BeautifulSoup
 
 from browser_fetch import fetch_profile_html
+from serpapi_fetch import fetch_author_serpapi
 
 
 RESULTS_DIR = Path(__file__).resolve().parent / "results"
@@ -141,6 +142,22 @@ def main() -> None:
             "GOOGLE_SCHOLAR_ID is not set. Add it as a GitHub Actions secret."
         )
 
+    provider = os.environ.get("SCHOLAR_PROVIDER", "serpapi").strip().lower()
+    if provider == "serpapi":
+        author = fetch_author_serpapi(scholar_id, os.environ.get("SERPAPI_API_KEY", ""))
+    elif provider == "browser":
+        author = fetch_browser_author_from_env(scholar_id)
+    else:
+        raise RuntimeError("SCHOLAR_PROVIDER must be serpapi or browser.")
+    write_results(author)
+    print(
+        f"Saved {len(author['publications'])} publications and "
+        f"{author['citedby']} total citations.",
+        flush=True,
+    )
+
+
+def fetch_browser_author_from_env(scholar_id: str) -> dict:
     auth_mode = os.environ.get("SCHOLAR_AUTH_MODE", "anonymous").strip().lower()
     if auth_mode not in ("anonymous", "cookie"):
         raise RuntimeError("SCHOLAR_AUTH_MODE must be anonymous or cookie.")
@@ -152,13 +169,7 @@ def main() -> None:
                 "Cookie mode requires GOOGLE_SCHOLAR_COOKIE. Run upload_cookies.py locally first."
             )
 
-    author = fetch_author(scholar_id, cookie)
-    write_results(author)
-    print(
-        f"Saved {len(author['publications'])} publications and "
-        f"{author['citedby']} total citations.",
-        flush=True,
-    )
+    return fetch_author(scholar_id, cookie)
 
 
 if __name__ == "__main__":

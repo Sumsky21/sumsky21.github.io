@@ -81,6 +81,7 @@ class ParseAuthorTests(unittest.TestCase):
     @patch.dict("os.environ", {
         "GOOGLE_SCHOLAR_ID": "abc",
         "GOOGLE_SCHOLAR_COOKIE": "NID=should-not-be-used",
+        "SCHOLAR_PROVIDER": "browser",
     }, clear=True)
     @patch("main.write_results")
     @patch("main.fetch_author", return_value={"citedby": 42, "publications": []})
@@ -93,6 +94,7 @@ class ParseAuthorTests(unittest.TestCase):
     @patch.dict("os.environ", {
         "GOOGLE_SCHOLAR_ID": "abc",
         "SCHOLAR_AUTH_MODE": "cookie",
+        "SCHOLAR_PROVIDER": "browser",
     }, clear=True)
     @patch("main.fetch_author")
     def test_explicit_cookie_mode_requires_cookie(self, fetch):
